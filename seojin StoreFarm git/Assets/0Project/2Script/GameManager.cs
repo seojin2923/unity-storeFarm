@@ -17,8 +17,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(oneTimemoneygold());
-        StartCoroutine(rent());
+        StartCoroutine(Timemoney());
 
         GameLoad();
     }
@@ -29,43 +28,24 @@ public class GameManager : MonoBehaviour
         GameSave();
     }
 
-    IEnumerator oneTimemoneygold()
+    IEnumerator Timemoney()
     {
         yield return new WaitForSecondsRealtime(1);
 
-        if(storeManager.storeusing == 1)
-            Money += 1;
-        else if(storeManager.storeusing == 2)
+        if(storeManager.storeusing == 2)
         {
             Money += 50;
-            Gold += 1;
         }
         else if(storeManager.storeusing == 3)
         {
             Money += 100;
-            Gold += 2;
         }
         else if(storeManager.storeusing == 4)
         {
-            Money += 500;
-            Gold += 3;
+            Money += 200;
         }
 
-        StartCoroutine(oneTimemoneygold());
-    }
-
-    IEnumerator rent()
-    {
-        yield return new WaitForSecondsRealtime(180);
-
-        if (storeManager.storeusing == 2)
-            Money -= 3000;
-        else if (storeManager.storeusing == 3)
-            Money -= 7000;
-        else if (storeManager.storeusing == 4)
-            Money -= 10000;
-
-        StartCoroutine(rent());
+        StartCoroutine(Timemoney());
     }
 
     void ReLoad()
@@ -126,7 +106,6 @@ public class GameManager : MonoBehaviour
         if(storeManager.storeusing == 1)
         {
             Money += (BigInteger)100;
-            Gold += (BigInteger)1;
         }
         else if(storeManager.storeusing == 2)
         {
@@ -134,17 +113,14 @@ public class GameManager : MonoBehaviour
             //Gold += Gold;
 
             Money += (BigInteger)200;
-            Gold += (BigInteger)2;
         }
         else if(storeManager.storeusing == 3)
         {
-            Money += (BigInteger)1000;
-            Gold += (BigInteger)3;
+            Money += (BigInteger)500;
         }
         else if(storeManager.storeusing == 4)
         {
-            Money += (BigInteger)5000;
-            Gold += (BigInteger)5;
+            Money += (BigInteger)1000;
         }
 
     }

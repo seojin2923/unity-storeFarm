@@ -32,8 +32,10 @@ public class StoreManager : MonoBehaviour
 
     public int storeusing;
 
-    public Animator StorePanelObj;
+    public Animator StorePanelanim;
     bool storePanelchacker;
+    public Animator thingPanelanim;
+    bool thingPanelchacker;
 
     public GameObject xmlPanelObj;
     bool xmlPanelchacker;
@@ -74,12 +76,25 @@ public class StoreManager : MonoBehaviour
         if (storePanelchacker)
         {
             storePanelchacker = false;
-            StorePanelObj.SetTrigger("doHide");
+            StorePanelanim.SetTrigger("doHide");
         }
         else
         {
             storePanelchacker = true;
-            StorePanelObj.SetTrigger("doShow");
+            StorePanelanim.SetTrigger("doShow");
+        }   
+    }
+    public void thingPanel()
+    {
+        if (thingPanelchacker)
+        {
+            thingPanelchacker = false;
+            thingPanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            thingPanelchacker = true;
+            thingPanelanim.SetTrigger("doShow");
         }   
     }
 
@@ -116,9 +131,9 @@ public class StoreManager : MonoBehaviour
 
     public void buy2()
     {
-        if (gameManager.Money > 12000)
+        if (gameManager.Money > 95000)
         {
-            gameManager.Money -= 12000;
+            gameManager.Money -= 95000;
             boolstore2unLock = true;
             store2unLockGroup.SetActive(true);
             store2LockGroup.SetActive(false);
@@ -129,9 +144,9 @@ public class StoreManager : MonoBehaviour
     }
     public void buy3()
     {
-        if (gameManager.Money > 32000)
+        if (gameManager.Money > 295000)
         {
-            gameManager.Money -= 32000;
+            gameManager.Money -= 295000;
             boolstore3unLock = true;
             store3unLockGroup.SetActive(true);
             store3LockGroup.SetActive(false);
@@ -142,9 +157,9 @@ public class StoreManager : MonoBehaviour
     }
     public void buy4()
     {
-        if (gameManager.Money > 170000)
+        if (gameManager.Money > 1000000)
         {
-            gameManager.Money -= 170000;
+            gameManager.Money -= 1000000;
             boolstore4unLock = true;
             store4unLockGroup.SetActive(true);
             store4LockGroup.SetActive(false);
