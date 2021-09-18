@@ -1,10 +1,8 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Xml;
 using System.Numerics;
-using System.IO;
-using System.Xml.Serialization;
 
 public class DataManager : MonoBehaviour
 {
@@ -21,18 +19,19 @@ public class DataManager : MonoBehaviour
     public void CreateXml()
     {
         XmlDocument xmlDoc = new XmlDocument();
-        // XmlÀ» ¼±¾ğÇÑ´Ù(xmlÀÇ ¹öÀü°ú ÀÎÄÚµù ¹æ½ÄÀ» Á¤ÇØÁØ´Ù.)
+        // Xmlì„ ì„ ì–¸í•œë‹¤(xmlì˜ ë²„ì „ê³¼ ì¸ì½”ë”© ë°©ì‹ì„ ì •í•´ì¤€ë‹¤.)
+
         xmlDoc.AppendChild(xmlDoc.CreateXmlDeclaration("1.0", "utf-8", "yes"));
 
-        // ·çÆ® ³ëµå »ı¼º
+        // ë£¨íŠ¸ ë…¸ë“œ ìƒì„±
         XmlNode root = xmlDoc.CreateNode(XmlNodeType.Element, "saveDataInfo", string.Empty);
         xmlDoc.AppendChild(root);
 
-        // ÀÚ½Ä ³ëµå »ı¼º
+        // ìì‹ ë…¸ë“œ ìƒì„±
         XmlNode child = xmlDoc.CreateNode(XmlNodeType.Element, "saveData", string.Empty);
         root.AppendChild(child);
 
-        // ÀÚ½Ä ³ëµå¿¡ µé¾î°¥ ¼Ó¼º »ı¼º
+        // ìì‹ ë…¸ë“œì— ë“¤ì–´ê°ˆ ì†ì„± ìƒì„±
         XmlElement store_number = xmlDoc.CreateElement("store_number");
         store_number.InnerText = storeManager.storeusing.ToString();
         child.AppendChild(store_number);

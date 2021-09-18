@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +10,10 @@ public class StoreManager : MonoBehaviour
     public Image storeImg;
     public Text storeText;
 
-    public Sprite ¾ÆÁÖÀÛÀº°¡°ÔImg;
-    public Sprite ÀÛÀº°¡°ÔImg;
-    public Sprite Á¶±İ±¦ÂúÀº°¡°ÔImg;
-    public Sprite ±¦ÂúÀº°¡°ÔImg;
+    public Sprite ì•„ì£¼ì‘ì€ê°€ê²ŒImg;
+    public Sprite ì‘ì€ê°€ê²ŒImg;
+    public Sprite ì¡°ê¸ˆê´œì°®ì€ê°€ê²ŒImg;
+    public Sprite ê´œì°®ì€ê°€ê²ŒImg;
 
     public bool boolstore1unLock = true;
     public bool boolstore2unLock = false;
@@ -47,23 +47,23 @@ public class StoreManager : MonoBehaviour
     {
         if (storeusing == 1)
         {
-            storeImg.sprite = ¾ÆÁÖÀÛÀº°¡°ÔImg;
-            storeText.text = "¾ÆÁÖ ÀÛÀº °¡°Ô";
+            storeImg.sprite = ì•„ì£¼ì‘ì€ê°€ê²ŒImg;
+            storeText.text = "ì•„ì£¼ì‘ì€ê°€ê²Œ";
         }
         else if (storeusing == 2)
         {
-            storeImg.sprite = ÀÛÀº°¡°ÔImg;
-            storeText.text = "ÀÛÀº °¡°Ô";
+            storeImg.sprite = ì‘ì€ê°€ê²ŒImg;
+            storeText.text = "ì‘ì€ê°€ê²Œ";
         }
         else if (storeusing == 3)
         {
-            storeImg.sprite = Á¶±İ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "Á¶±İ ±¦ÂúÀº °¡°Ô";
+            storeImg.sprite = ì¡°ê¸ˆê´œì°®ì€ê°€ê²ŒImg;
+            storeText.text = "ì¡°ê¸ˆê´œì°®ì€ê°€ê²Œ";
         }
         else if (storeusing == 4)
         {
-            storeImg.sprite = ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "±¦ÂúÀº °¡°Ô";
+            storeImg.sprite = ê´œì°®ì€ê°€ê²ŒImg;
+            storeText.text = "ê´œì°®ì€ê°€ê²Œ";
         }
            
 
@@ -125,7 +125,7 @@ public class StoreManager : MonoBehaviour
             use2();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
     public void buy3()
     {
@@ -138,7 +138,7 @@ public class StoreManager : MonoBehaviour
             use3();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
     public void buy4()
     {
@@ -151,7 +151,7 @@ public class StoreManager : MonoBehaviour
             use4();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
 
 }

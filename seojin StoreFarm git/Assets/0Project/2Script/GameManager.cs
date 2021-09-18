@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,11 +73,11 @@ public class GameManager : MonoBehaviour
         MoneyTxt.text = GetMoneyText();
         GoldTxt.text = GetGoldText();
 
-        //MoneyTxt.text = Money + " ¿ø";
-        //GoldTxt.text = Gold + " °ñµå";
+        //MoneyTxt.text = Money + " ì›";
+        //GoldTxt.text = Gold + " ê³¨ë“œ";
     }
 
-    private string[] moneyUnitArr = new string[] { "¿ø", "¸¸", "¾ï", "Á¶", "°æ", "ÇØ", "ÀÚ", "¾ç" };
+    private string[] moneyUnitArr = new string[] { "ì›", "ë§Œ", "ì–µ", "ì¡°", "ê²½", "í•´", "ì", "ì–‘", "" };
     private string GetMoneyText()
     {
         int placeN = 4;
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         return retStr;
     }
 
-    private string[] goldUnitArr = new string[] { "°ñµå", ",", ",", ",", ",", ",", ",", "," };
+    private string[] goldUnitArr = new string[] { "ê³¨ë“œ", ",", ",", ",", ",", ",", ",", ",", "," };
     private string GetGoldText()
     {
         int placeN = 4;
