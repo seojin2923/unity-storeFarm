@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         //GoldTxt.text = Gold + " 골드";
     }
 
-    private string[] moneyUnitArr = new string[] { "원", "만", "억", "조", "경", "해", "자", "양", "" };
+    private string[] moneyUnitArr = new string[] { "원", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 " };
     private string GetMoneyText()
     {
         int placeN = 4;
@@ -144,7 +144,9 @@ public class GameManager : MonoBehaviour
 
     public void GameLoad()
     {
-        dataManager.LoadXml();
+        //dataManager.LoadXml();
+        dataManager.Load();
+
     }
 
     public void GameExit()
