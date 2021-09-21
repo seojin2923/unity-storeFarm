@@ -36,6 +36,8 @@ public class StoreManager : MonoBehaviour
     bool storePanelchacker;
     public Animator thingPanelanim;
     bool thingPanelchacker;
+    public Animator upgradePanelanim;
+    bool upgradePanelchacker;
 
     public GameObject xmlPanelObj;
     bool xmlPanelchacker;
@@ -95,6 +97,20 @@ public class StoreManager : MonoBehaviour
         {
             thingPanelchacker = true;
             thingPanelanim.SetTrigger("doShow");
+        }   
+    }
+
+    public void upgradePanel()
+    {
+        if (upgradePanelchacker)
+        {
+            upgradePanelchacker = false;
+            upgradePanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            upgradePanelchacker = true;
+            upgradePanelanim.SetTrigger("doShow");
         }   
     }
 
