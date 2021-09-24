@@ -32,12 +32,15 @@ public class StoreManager : MonoBehaviour
 
     public int storeusing;
 
+    public Animator AchiPanelanim;
+    bool AchiPanelchacker;
     public Animator StorePanelanim;
     bool storePanelchacker;
     public Animator thingPanelanim;
     bool thingPanelchacker;
     public Animator upgradePanelanim;
     bool upgradePanelchacker;
+    
 
     public GameObject xmlPanelObj;
     bool xmlPanelchacker;
@@ -73,6 +76,19 @@ public class StoreManager : MonoBehaviour
 
     }
 
+    public void AchiPanel()
+    {
+        if (AchiPanelchacker)
+        {
+            AchiPanelchacker = false;
+            AchiPanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            AchiPanelchacker = true;
+            AchiPanelanim.SetTrigger("doShow");
+        }
+    }
     public void storePanel()
     {
         if (storePanelchacker)
@@ -99,7 +115,6 @@ public class StoreManager : MonoBehaviour
             thingPanelanim.SetTrigger("doShow");
         }   
     }
-
     public void upgradePanel()
     {
         if (upgradePanelchacker)

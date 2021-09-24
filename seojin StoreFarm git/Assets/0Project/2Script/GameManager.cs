@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Numerics;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public StoreManager storeManager;
     public DataManager dataManager;
+    public thingManager thingManager;
 
     public BigInteger Money;
     public BigInteger Gold;
@@ -19,31 +21,45 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(Timemoney());
 
-        GameLoad();
+        //GameLoad();
     }
 
     void Update()
     {
         ReLoad();
-        GameSave();
+        //GameSave();
+
+        if (Input.GetButtonDown("Jump"))
+            onClick();
     }
 
     IEnumerator Timemoney()
     {
         yield return new WaitForSecondsRealtime(1);
 
+        //Store Timemoney
         if(storeManager.storeusing == 2)
-        {
             Money += 50;
-        }
         else if(storeManager.storeusing == 3)
-        {
             Money += 100;
-        }
         else if(storeManager.storeusing == 4)
-        {
             Money += 200;
-        }
+
+        //thing Timemoney
+        if (thingManager.boolthing1unLock == true)
+            Money += 50;
+
+        if (thingManager.boolthing2unLock == true)
+            Money += 3000;
+        
+        if (thingManager.boolthing3unLock == true)
+            Money += 10000;
+
+        if (thingManager.boolthing4unLock == true)
+            Money += 20000;
+
+        if (thingManager.boolthing5unLock == true)
+            Money += 50000;
 
         StartCoroutine(Timemoney());
     }
@@ -134,6 +150,13 @@ public class GameManager : MonoBehaviour
     public void GameSave()
     {
         dataManager.CreateXml();
+
+        string stringMoney = Money.ToString();
+        string stringGold = Gold.ToString();
+
+        PlayerPrefs.SetString("SaveMoney", stringMoney);
+        PlayerPrefs.SetString("SaveGold", stringGold);
+
     }
 
     public void GameSaveOverlap()
@@ -144,9 +167,7 @@ public class GameManager : MonoBehaviour
 
     public void GameLoad()
     {
-        //dataManager.LoadXml();
-        dataManager.Load();
-
+        dataManager.LoadXml();
     }
 
     public void GameExit()
