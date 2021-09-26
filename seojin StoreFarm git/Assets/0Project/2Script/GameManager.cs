@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Numerics;
-using System;
 
 public class GameManager : MonoBehaviour
 {
     public StoreManager storeManager;
     public DataManager dataManager;
     public thingManager thingManager;
+    public UpgradeManager upgradeManager;
 
     public BigInteger Money;
     public BigInteger Gold;
 
     public Text MoneyTxt;
     public Text GoldTxt;
+    public Text TestText;
 
     void Start()
     {
@@ -38,11 +39,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
 
         //Store Timemoney
-        if(storeManager.storeusing == 2)
+        if (storeManager.storeusing == 2)
             Money += 50;
-        else if(storeManager.storeusing == 3)
+        else if (storeManager.storeusing == 3)
             Money += 100;
-        else if(storeManager.storeusing == 4)
+        else if (storeManager.storeusing == 4)
             Money += 200;
 
         //thing Timemoney
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
         if (thingManager.boolthing2unLock == true)
             Money += 3000;
-        
+
         if (thingManager.boolthing3unLock == true)
             Money += 10000;
 
@@ -88,7 +89,7 @@ public class GameManager : MonoBehaviour
         }
         while (value >= 1);
         string retStr = "";
-        for(int i = 0; i< numList.Count; i++)
+        for (int i = 0; i < numList.Count; i++)
         {
             retStr = numList[i] + moneyUnitArr[i] + retStr;
         }
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
         }
         while (value >= 1);
         string retStr = "";
-        for(int i = 0; i< numList.Count; i++)
+        for (int i = 0; i < numList.Count; i++)
         {
             retStr = numList[i] + goldUnitArr[i] + retStr;
         }
@@ -119,26 +120,29 @@ public class GameManager : MonoBehaviour
 
     public void onClick()
     {
-        if(storeManager.storeusing == 1)
+        float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;
+
+        if (storeManager.storeusing == 1)
         {
-            Money += (BigInteger)100;
+            Money += (BigInteger)100 * (int)MoneyUpgradeLv;
         }
-        else if(storeManager.storeusing == 2)
+        else if (storeManager.storeusing == 2)
         {
             //Money += Money;
             //Gold += Gold;
 
-            Money += (BigInteger)200;
+            Money += (BigInteger)200 * (int)MoneyUpgradeLv;
         }
-        else if(storeManager.storeusing == 3)
+        else if (storeManager.storeusing == 3)
         {
-            Money += (BigInteger)500;
+            Money += (BigInteger)500 * (int)MoneyUpgradeLv;
         }
-        else if(storeManager.storeusing == 4)
+        else if (storeManager.storeusing == 4)
         {
-            Money += (BigInteger)1000;
+            Money += (BigInteger)1000 * (int)MoneyUpgradeLv;
         }
 
+        TestText.GetComponent<Text>().text = MoneyUpgradeLv.ToString();
     }
 
     public void Reset()
@@ -163,7 +167,6 @@ public class GameManager : MonoBehaviour
     {
         dataManager.SaveOverlapXml();
     }
-    
 
     public void GameLoad()
     {
