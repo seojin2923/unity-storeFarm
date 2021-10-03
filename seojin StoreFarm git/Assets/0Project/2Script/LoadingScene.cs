@@ -19,7 +19,7 @@ public class LoadingScene : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(LoadSceneProcess());
+        StartCoroutine(LoadSceneProcess()); 
     }
 
     IEnumerator LoadSceneProcess()
