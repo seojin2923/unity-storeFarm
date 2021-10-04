@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public StoreManager storeManager;
-    public DataManager dataManager;
     public thingManager thingManager;
     public UpgradeManager upgradeManager;
 
@@ -153,24 +152,17 @@ public class GameManager : MonoBehaviour
 
     public void GameSave()
     {
-        dataManager.CreateXml();
-
-        string stringMoney = Money.ToString();
-        string stringGold = Gold.ToString();
-
-        PlayerPrefs.SetString("SaveMoney", stringMoney);
-        PlayerPrefs.SetString("SaveGold", stringGold);
 
     }
 
     public void GameSaveOverlap()
     {
-        dataManager.SaveOverlapXml();
+
     }
 
     public void GameLoad()
     {
-        dataManager.LoadXml();
+
     }
 
     public void GameExit()

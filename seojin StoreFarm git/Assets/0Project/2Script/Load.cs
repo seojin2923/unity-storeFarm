@@ -13,4 +13,14 @@ public class Load : MonoBehaviour
     {
         LoadingScene.LoadScene("Main");
     }
+
+    public void LoadHelp()
+    {
+        LoadingScene.LoadScene("Help");
+    }
+
+    public void LoadnewVersion()
+    {
+        LoadingScene.LoadScene("newVersion");
+    }
 }
