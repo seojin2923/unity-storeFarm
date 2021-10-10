@@ -2,78 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
+using System;
 
 public class StoreManager : MonoBehaviour
 {
     public GameManager gameManager;
 
+    public int storeusing;
+
     public Image storeImg;
     public Text storeText;
 
-    public Sprite 아주작은가게Img;
-    public Sprite 작은가게Img;
-    public Sprite 조금괜찮은가게Img;
-    public Sprite 괜찮은가게Img;
+    public Sprite[] StoreImage;
 
-    public bool boolstore1unLock = true;
-    public bool boolstore2unLock = false;
-    public bool boolstore3unLock = false;
-    public bool boolstore4unLock = false;
-    public bool boolstore5unLock = false;
+    public bool[] boolstoreunLock;
 
-    public GameObject store2LockGroup;
-    public GameObject store2unLockGroup;
+    public GameObject[] storeLockGroup;
+    public GameObject[] storeunLockGroup;
 
-    public GameObject store3LockGroup;
-    public GameObject store3unLockGroup;
-
-    public GameObject store4LockGroup;
-    public GameObject store4unLockGroup;
-
-    public int storeusing;
-
-    public Animator AchiPanelanim;
-    bool AchiPanelchacker;
-    public Animator StorePanelanim;
-    bool storePanelchacker;
-    public Animator thingPanelanim;
-    bool thingPanelchacker;
-    public Animator upgradePanelanim;
-    bool upgradePanelchacker;
-    
-
+    public Animator[] Panelanim;
     public GameObject xmlPanelObj;
+
+    bool AchiPanelchacker;
+    bool storePanelchacker;
+    bool thingPanelchacker;
+    bool upgradePanelchacker;
     bool xmlPanelchacker;
+
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
 
     void Start()
     {
-        
+        // 엔터단위와 탭으로 나눠서 배열의 크기 조정
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // 한 줄에서 탭으로 나눔
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
+
+        StartCoroutine(reload());
     }
 
-    void Update()
+    IEnumerator reload()
     {
-        if (storeusing == 1)
-        {
-            storeImg.sprite = 아주작은가게Img;
-            storeText.text = "아주작은가게";
-        }
-        else if (storeusing == 2)
-        {
-            storeImg.sprite = 작은가게Img;
-            storeText.text = "작은가게";
-        }
-        else if (storeusing == 3)
-        {
-            storeImg.sprite = 조금괜찮은가게Img;
-            storeText.text = "조금괜찮은가게";
-        }
-        else if (storeusing == 4)
-        {
-            storeImg.sprite = 괜찮은가게Img;
-            storeText.text = "괜찮은가게";
-        }
-           
+        int Line = storeusing - 1;
 
+        storeImg.sprite = StoreImage[Line];
+
+        string storetxt = Sentence[Line, 4];
+
+        storeText.text = storetxt;
+
+        yield return null;
+        StartCoroutine(reload());
+    }
+
+    public void use(int number)
+    {
+        storeusing = number;
     }
 
     public void AchiPanel()
@@ -81,12 +77,12 @@ public class StoreManager : MonoBehaviour
         if (AchiPanelchacker)
         {
             AchiPanelchacker = false;
-            AchiPanelanim.SetTrigger("doHide");
+            Panelanim[0].SetTrigger("doHide");
         }
         else
         {
             AchiPanelchacker = true;
-            AchiPanelanim.SetTrigger("doShow");
+            Panelanim[0].SetTrigger("doShow");
         }
     }
     public void storePanel()
@@ -94,12 +90,12 @@ public class StoreManager : MonoBehaviour
         if (storePanelchacker)
         {
             storePanelchacker = false;
-            StorePanelanim.SetTrigger("doHide");
+            Panelanim[1].SetTrigger("doHide");
         }
         else
         {
             storePanelchacker = true;
-            StorePanelanim.SetTrigger("doShow");
+            Panelanim[1].SetTrigger("doShow");
         }   
     }
     public void thingPanel()
@@ -107,12 +103,12 @@ public class StoreManager : MonoBehaviour
         if (thingPanelchacker)
         {
             thingPanelchacker = false;
-            thingPanelanim.SetTrigger("doHide");
+            Panelanim[2].SetTrigger("doHide");
         }
         else
         {
             thingPanelchacker = true;
-            thingPanelanim.SetTrigger("doShow");
+            Panelanim[2].SetTrigger("doShow");
         }   
     }
     public void upgradePanel()
@@ -120,15 +116,14 @@ public class StoreManager : MonoBehaviour
         if (upgradePanelchacker)
         {
             upgradePanelchacker = false;
-            upgradePanelanim.SetTrigger("doHide");
+            Panelanim[3].SetTrigger("doHide");
         }
         else
         {
             upgradePanelchacker = true;
-            upgradePanelanim.SetTrigger("doShow");
+            Panelanim[3].SetTrigger("doShow");
         }   
     }
-
     public void xmlPanel()
     {
         if (xmlPanelchacker)
@@ -143,32 +138,32 @@ public class StoreManager : MonoBehaviour
         }   
     }
 
-    public void use1()
+    public void buy(int buy_number)
     {
-        storeusing = 1;
-    }
-    public void use2()
-    {
-        storeusing = 2;
-    }
-    public void use3()
-    {
-        storeusing = 3;
-    }
-    public void use4()
-    {
-        storeusing = 4;
-    }
+        int Line = buy_number - 1;
+        int Group_number = buy_number - 2;
 
+        if (gameManager.Money >= int.Parse(Sentence[Line, 1]))
+        {
+            gameManager.Money -= int.Parse(Sentence[Line, 1]);
+            boolstoreunLock[Line] = true;
+            storeunLockGroup[Group_number].SetActive(true);
+            storeLockGroup[Group_number].SetActive(false);
+            use(buy_number);
+        }
+        else
+            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
+    }
+    
     public void buy2()
     {
-        if (gameManager.Money > 95000)
+        if (gameManager.Money >= 95000)
         {
             gameManager.Money -= 95000;
-            boolstore2unLock = true;
-            store2unLockGroup.SetActive(true);
-            store2LockGroup.SetActive(false);
-            use2();
+            boolstoreunLock[1] = true;
+            storeunLockGroup[0].SetActive(true);
+            storeLockGroup[0].SetActive(false);
+            use(2);
         }
         else
             Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
@@ -178,10 +173,10 @@ public class StoreManager : MonoBehaviour
         if (gameManager.Money > 295000)
         {
             gameManager.Money -= 295000;
-            boolstore3unLock = true;
-            store3unLockGroup.SetActive(true);
-            store3LockGroup.SetActive(false);
-            use3();
+            boolstoreunLock[2] = true;
+            storeunLockGroup[1].SetActive(true);
+            storeLockGroup[1].SetActive(false);
+            use(3);
         }
         else
             Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
@@ -191,10 +186,49 @@ public class StoreManager : MonoBehaviour
         if (gameManager.Money > 1000000)
         {
             gameManager.Money -= 1000000;
-            boolstore4unLock = true;
-            store4unLockGroup.SetActive(true);
-            store4LockGroup.SetActive(false);
-            use4();
+            boolstoreunLock[3] = true;
+            storeunLockGroup[2].SetActive(true);
+            storeLockGroup[2].SetActive(false);
+            use(4);
+        }
+        else
+            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
+    }
+    public void buy5()
+    {
+        if (gameManager.Money > 1500000)
+        {
+            gameManager.Money -= 1500000;
+            boolstoreunLock[4] = true;
+            storeunLockGroup[3].SetActive(true);
+            storeLockGroup[3].SetActive(false);
+            use(5);
+        }
+        else
+            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
+    }
+    public void buy6()
+    {
+        if (gameManager.Money > 3500000)
+        {
+            gameManager.Money -= 3500000;
+            boolstoreunLock[5] = true;
+            storeunLockGroup[4].SetActive(true);
+            storeLockGroup[4].SetActive(false);
+            use(6);
+        }
+        else
+            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
+    }
+    public void buy7()
+    {
+        if (gameManager.Money > 5000000)
+        {
+            gameManager.Money -= 5000000;
+            boolstoreunLock[6] = true;
+            storeunLockGroup[5].SetActive(true);
+            storeLockGroup[5].SetActive(false);
+            use(7);
         }
         else
             Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");

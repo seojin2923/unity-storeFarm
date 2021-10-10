@@ -11,89 +11,54 @@ public class UpgradeManager : MonoBehaviour
     public Text MoneyUpgradeButtonText;
     public Text MoneyUpgradeLavelText;
 
-    void Update()
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
+
+    void Start()
     {
-        MoneyUpgrade();
+        // 엔터단위와 탭으로 나눠서 배열의 크기 조정
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // 한 줄에서 탭으로 나눔
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
+
+        StartCoroutine(MoneyUpgradeText());
     }
 
-    void MoneyUpgrade()
+    void Update()
     {
-        if (MoneyUpgradeLevel == 1)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "5천원";
-        else if (MoneyUpgradeLevel == 2)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "만원";
-        else if (MoneyUpgradeLevel == 3)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "4만원";
-        else if (MoneyUpgradeLevel == 4)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "10만원";
-        else if (MoneyUpgradeLevel == 5)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "15만원";
-        else if (MoneyUpgradeLevel == 6)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "34만원";
-        else if (MoneyUpgradeLevel == 7)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "45만원";
-        else if (MoneyUpgradeLevel == 8)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "68만원";
-        else if (MoneyUpgradeLevel == 9)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "90만원";
-        else if (MoneyUpgradeLevel == 10)
-            MoneyUpgradeButtonText.GetComponent<Text>().text = "140만원";
+        //MoneyUpgrade();
+    }
+
+    IEnumerator MoneyUpgradeText()
+    {
+        int Line = MoneyUpgradeLevel - 1;
+
+        MoneyUpgradeButtonText.GetComponent<Text>().text = Sentence[Line, 1];
 
         MoneyUpgradeLavelText.GetComponent<Text>().text = "Lv." + MoneyUpgradeLevel.ToString();
+
+        yield return null;
+        StartCoroutine(MoneyUpgradeText());
     }
 
     public void UpgradeMoney()
     {
-        if (MoneyUpgradeLevel == 1 && gameManager.Money >= 5000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 5000;
-        }
-        else if (MoneyUpgradeLevel == 2 && gameManager.Money >= 10000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 10000;
-        }
-        else if (MoneyUpgradeLevel == 3 && gameManager.Money >= 40000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 40000;
-        }
-        else if (MoneyUpgradeLevel == 4 && gameManager.Money >= 100000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 100000;
-        }
-        else if (MoneyUpgradeLevel == 5 && gameManager.Money >= 150000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 150000;
-        }
-        else if (MoneyUpgradeLevel == 6 && gameManager.Money >= 340000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 340000;
-        }
-        else if (MoneyUpgradeLevel == 7 && gameManager.Money >= 450000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 450000;
-        }
-        else if (MoneyUpgradeLevel == 8 && gameManager.Money >= 680000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 680000;
-        }
-        else if (MoneyUpgradeLevel == 9 && gameManager.Money >= 900000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 900000;
-        }
-        else if (MoneyUpgradeLevel == 10 && gameManager.Money >= 1400000)
-        {
-            MoneyUpgradeLevel++;
-            gameManager.Money -= 1400000;
-        }
+        int Line = MoneyUpgradeLevel - 1;
 
+        if(MoneyUpgradeLevel == int.Parse(Sentence[Line, 0]) && gameManager.Money >= int.Parse(Sentence[Line, 2]))
+        {
+            MoneyUpgradeLevel++;
+            gameManager.Money -= int.Parse(Sentence[Line, 2]);
+        }
     }
 }

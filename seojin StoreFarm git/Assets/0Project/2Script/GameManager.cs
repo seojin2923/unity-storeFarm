@@ -140,6 +140,22 @@ public class GameManager : MonoBehaviour
         {
             Money += (BigInteger)1000 * (int)MoneyUpgradeLv;
         }
+        else if (storeManager.storeusing == 5)
+        {
+            Money += (BigInteger)1500 * (int)MoneyUpgradeLv;
+        }
+        else if (storeManager.storeusing == 6)
+        {
+            Money += (BigInteger)1500 * (int)MoneyUpgradeLv;
+        }
+        else if (storeManager.storeusing == 7)
+        {
+            Money += (BigInteger)2000 * (int)MoneyUpgradeLv;
+        }
+        else
+        {
+            Debug.Log("on click 코드 추가 필요");
+        }
 
         TestText.GetComponent<Text>().text = MoneyUpgradeLv.ToString();
     }
