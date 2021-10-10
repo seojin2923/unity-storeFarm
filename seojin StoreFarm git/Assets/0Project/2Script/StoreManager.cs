@@ -61,7 +61,24 @@ public class StoreManager : MonoBehaviour
 
         string storetxt = Sentence[Line, 4];
 
-        storeText.text = storetxt;
+        if (storeusing == 1)
+            storeText.text = "아주 작은 가게";
+        else if (storeusing == 2)
+            storeText.text = "작은 가게";
+        else if (storeusing == 3)
+            storeText.text = "조금 괜찮은 가게 가게";
+        else if (storeusing == 4)
+            storeText.text = "괜찮은 가게 가게";
+        else if (storeusing == 5)
+            storeText.text = "좋은 가게";
+        else if (storeusing == 6)
+            storeText.text = "아주 좋은 가게";
+        else if (storeusing == 7)
+            storeText.text = "큰 가게";
+        else if (storeusing == 8)
+            storeText.text = "사과 모양 가게";
+        else if (storeusing == 8)
+            storeText.text = "복숭아 모양 가게";
 
         yield return null;
         StartCoroutine(reload());
@@ -150,85 +167,6 @@ public class StoreManager : MonoBehaviour
             storeunLockGroup[Group_number].SetActive(true);
             storeLockGroup[Group_number].SetActive(false);
             use(buy_number);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    
-    public void buy2()
-    {
-        if (gameManager.Money >= 95000)
-        {
-            gameManager.Money -= 95000;
-            boolstoreunLock[1] = true;
-            storeunLockGroup[0].SetActive(true);
-            storeLockGroup[0].SetActive(false);
-            use(2);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    public void buy3()
-    {
-        if (gameManager.Money > 295000)
-        {
-            gameManager.Money -= 295000;
-            boolstoreunLock[2] = true;
-            storeunLockGroup[1].SetActive(true);
-            storeLockGroup[1].SetActive(false);
-            use(3);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    public void buy4()
-    {
-        if (gameManager.Money > 1000000)
-        {
-            gameManager.Money -= 1000000;
-            boolstoreunLock[3] = true;
-            storeunLockGroup[2].SetActive(true);
-            storeLockGroup[2].SetActive(false);
-            use(4);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    public void buy5()
-    {
-        if (gameManager.Money > 1500000)
-        {
-            gameManager.Money -= 1500000;
-            boolstoreunLock[4] = true;
-            storeunLockGroup[3].SetActive(true);
-            storeLockGroup[3].SetActive(false);
-            use(5);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    public void buy6()
-    {
-        if (gameManager.Money > 3500000)
-        {
-            gameManager.Money -= 3500000;
-            boolstoreunLock[5] = true;
-            storeunLockGroup[4].SetActive(true);
-            storeLockGroup[4].SetActive(false);
-            use(6);
-        }
-        else
-            Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
-    }
-    public void buy7()
-    {
-        if (gameManager.Money > 5000000)
-        {
-            gameManager.Money -= 5000000;
-            boolstoreunLock[6] = true;
-            storeunLockGroup[5].SetActive(true);
-            storeLockGroup[5].SetActive(false);
-            use(7);
         }
         else
             Debug.Log("돈이 " + gameManager.Money + "밖에 없음 모자라");
