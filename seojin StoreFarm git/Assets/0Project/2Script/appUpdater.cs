@@ -59,7 +59,7 @@ public class appUpdater : MonoBehaviour
 
     public void Updateyes()
     {
-        Application.OpenURL("http://seojin1.kro.kr");
+        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarm.html");
     }
     public void UpdateNo()
     {
