@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public PanelManager panelManager;
     public StoreManager storeManager;
     public thingManager thingManager;
     public UpgradeManager upgradeManager;
@@ -17,18 +18,32 @@ public class GameManager : MonoBehaviour
     public Text GoldTxt;
     public Text TestText;
 
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
+
     void Start()
     {
         StartCoroutine(Timemoney());
 
-        //GameLoad();
+        // 엔터단위와 탭으로 나눠서 배열의 크기 조정
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // 한 줄에서 탭으로 나눔
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
     }
 
     void Update()
     {
         ReLoad();
-        //GameSave();
-
         if (Input.GetButtonDown("Jump"))
             onClick();
     }
@@ -38,12 +53,8 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1);
 
         //Store Timemoney
-        if (storeManager.storeusing == 2)
-            Money += 50;
-        else if (storeManager.storeusing == 3)
-            Money += 100;
-        else if (storeManager.storeusing == 4)
-            Money += 200;
+        int Line = storeManager.storeusing - 1;
+        Money += int.Parse(Sentence[Line, 3]);
 
         //thing Timemoney
         if (thingManager.boolthing1unLock == true)
@@ -68,9 +79,6 @@ public class GameManager : MonoBehaviour
     {
         MoneyTxt.text = GetMoneyText();
         GoldTxt.text = GetGoldText();
-
-        //MoneyTxt.text = Money + " 원";
-        //GoldTxt.text = Gold + " 골드";
     }
 
     private string[] moneyUnitArr = new string[] { "원", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 " };
@@ -119,51 +127,20 @@ public class GameManager : MonoBehaviour
 
     public void onClick()
     {
+        panelManager.boolPanel[0] = false;
+        panelManager.boolPanel[1] = false;
+        panelManager.boolPanel[2] = false;
+        panelManager.boolPanel[3] = false;
+        panelManager.boolPanel[4] = false;
+
+        panelManager.boolPanel[0] = false;
+
         float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;
+        int Line = storeManager.storeusing - 1;
 
-        if (storeManager.storeusing == 1)
-        {
-            Money += (BigInteger)100 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 2)
-        {
-            //Money += Money;
-            //Gold += Gold;
-
-            Money += (BigInteger)200 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 3)
-        {
-            Money += (BigInteger)500 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 4)
-        {
-            Money += (BigInteger)1000 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 5)
-        {
-            Money += (BigInteger)1500 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 6)
-        {
-            Money += (BigInteger)1500 * (int)MoneyUpgradeLv;
-        }
-        else if (storeManager.storeusing == 7)
-        {
-            Money += (BigInteger)2000 * (int)MoneyUpgradeLv;
-        }
-        else
-        {
-            Debug.Log("on click 코드 추가 필요");
-        }
+        Money += int.Parse(Sentence[Line, 2]) * (int)MoneyUpgradeLv;
 
         TestText.GetComponent<Text>().text = MoneyUpgradeLv.ToString();
-    }
-
-    public void Reset()
-    {
-        Money = 0;
-        Gold = 0;
     }
 
     public void GameSave()

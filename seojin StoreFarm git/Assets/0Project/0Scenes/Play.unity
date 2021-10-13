@@ -1374,6 +1374,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145117325}
   m_CullTransparentMesh: 1
+--- !u!1 &147855917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 147855918}
+  - component: {fileID: 147855919}
+  m_Layer: 0
+  m_Name: PanelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &147855918
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147855917}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1019338755}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &147855919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 147855917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68806627bc828c4bbfe295c76b8572f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolPanel: 0000000000
+  Panelanim:
+  - {fileID: 1413660728}
+  - {fileID: 595148781}
+  - {fileID: 1205576818}
+  - {fileID: 131566708}
+  xmlPanel: {fileID: 1979033650}
+  txt: {fileID: 4900000, guid: d2ae7997cd887ef4dbfcd74911749fee, type: 3}
 --- !u!1 &149227396
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,14 +1722,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216665896}
-        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
-        m_MethodName: AchiPanel
-        m_Mode: 1
+      - m_Target: {fileID: 147855919}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: Panel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6781,14 +6832,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216665896}
-        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
-        m_MethodName: storePanel
-        m_Mode: 1
+      - m_Target: {fileID: 147855919}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: Panel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6860,7 +6911,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &733337940
 MonoBehaviour:
@@ -7800,7 +7851,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &903585987
 MonoBehaviour:
@@ -8729,14 +8780,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216665896}
-        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
-        m_MethodName: thingPanel
-        m_Mode: 1
+      - m_Target: {fileID: 147855919}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: Panel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8846,6 +8897,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2022722887}
+  - {fileID: 147855918}
   - {fileID: 1216665897}
   - {fileID: 1998839144}
   - {fileID: 2055419863}
@@ -9383,14 +9435,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216665896}
-        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
-        m_MethodName: xmlPanel
-        m_Mode: 1
+      - m_Target: {fileID: 147855919}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: Panel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10237,12 +10289,6 @@ MonoBehaviour:
   - {fileID: 467451405}
   - {fileID: 996854464}
   - {fileID: 394440109}
-  Panelanim:
-  - {fileID: 1413660728}
-  - {fileID: 595148781}
-  - {fileID: 1205576818}
-  - {fileID: 131566708}
-  xmlPanelObj: {fileID: 1979033650}
   txt: {fileID: 4900000, guid: 64fb530c81dfd904888c4b645fb3df2a, type: 3}
 --- !u!4 &1216665897
 Transform:
@@ -10256,7 +10302,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218242792
 GameObject:
@@ -13290,14 +13336,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1216665896}
-        m_TargetAssemblyTypeName: StoreManager, Assembly-CSharp
-        m_MethodName: upgradePanel
-        m_Mode: 1
+      - m_Target: {fileID: 147855919}
+        m_TargetAssemblyTypeName: PanelManager, Assembly-CSharp
+        m_MethodName: Panel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14998,7 +15044,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1843530507
 MonoBehaviour:
@@ -16942,7 +16988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2022722886
 GameObject:
@@ -16987,12 +17033,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 862cafa37adc6a94bbfcba76ecb89197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelManager: {fileID: 147855919}
   storeManager: {fileID: 1216665896}
   thingManager: {fileID: 1998839143}
   upgradeManager: {fileID: 903585987}
   MoneyTxt: {fileID: 956868352}
   GoldTxt: {fileID: 620201298}
   TestText: {fileID: 316513365}
+  txt: {fileID: 4900000, guid: 64fb530c81dfd904888c4b645fb3df2a, type: 3}
 --- !u!1 &2051014644
 GameObject:
   m_ObjectHideFlags: 0
@@ -17101,7 +17149,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1019338755}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2055419864
 MonoBehaviour:
