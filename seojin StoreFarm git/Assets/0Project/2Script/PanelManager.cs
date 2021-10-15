@@ -32,26 +32,6 @@ public class PanelManager : MonoBehaviour
 
     void Update()
     {
-        if (!boolPanel[0])
-        {
-            Panelanim[0].SetTrigger("doHide");
-        }
-        else if (!boolPanel[1])
-        {
-            Panelanim[1].SetTrigger("doHide");
-        }
-        else if (!boolPanel[2])
-        {
-            Panelanim[2].SetTrigger("doHide");
-        }
-        else if (!boolPanel[3])
-        {
-            Panelanim[3].SetTrigger("doHide");
-        }
-        else if (!boolPanel[4])
-        {
-            xmlPanel.SetActive(false);
-        }
 
     }
 
