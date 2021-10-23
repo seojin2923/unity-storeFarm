@@ -127,14 +127,6 @@ public class GameManager : MonoBehaviour
 
     public void onClick()
     {
-        panelManager.boolPanel[0] = false;
-        panelManager.boolPanel[1] = false;
-        panelManager.boolPanel[2] = false;
-        panelManager.boolPanel[3] = false;
-        panelManager.boolPanel[4] = false;
-
-        panelManager.boolPanel[0] = false;
-
         float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;
         int Line = storeManager.storeusing - 1;
 

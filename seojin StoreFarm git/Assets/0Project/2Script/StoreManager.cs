@@ -68,7 +68,7 @@ public class StoreManager : MonoBehaviour
             storeText.text = "큰 가게";
         else if (storeusing == 8)
             storeText.text = "사과 모양 가게";
-        else if (storeusing == 8)
+        else if (storeusing == 9)
             storeText.text = "복숭아 모양 가게";
 
         yield return null;
