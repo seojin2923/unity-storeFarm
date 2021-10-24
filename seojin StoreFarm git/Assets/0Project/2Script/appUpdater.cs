@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class appUpdater : MonoBehaviour
 {
+    public versionManager versionManager;
+
     public Load load;
 
     public string CurVersion; // 현재 빌드버전
@@ -39,7 +41,7 @@ public class appUpdater : MonoBehaviour
 
     IEnumerator GetText()
     {
-        UnityWebRequest www = UnityWebRequest.Get("http://seojin1.kro.kr/2.0/html/game/storeFarmVersion.txt");
+        UnityWebRequest www = UnityWebRequest.Get(versionManager.versionLink);
         yield return www.SendWebRequest();
 
         if (www.error == null)
@@ -59,7 +61,7 @@ public class appUpdater : MonoBehaviour
 
     public void Updateyes()
     {
-        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarm.html");
+        Application.OpenURL(versionManager.downloadLink);
     }
     public void UpdateNo()
     {

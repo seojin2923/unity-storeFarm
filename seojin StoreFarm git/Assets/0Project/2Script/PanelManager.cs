@@ -40,6 +40,24 @@ public class PanelManager : MonoBehaviour
         int Panelup1 = PanelNumber + 1;
         int Paneldown1 = PanelNumber - 1;
 
+        for(int i = 0; i < 5; i++)
+        {
+            if (i == 4)
+            {
+                boolPanel[i] = false;
+                xmlPanel.SetActive(false);
+            }
+            else 
+            {
+                if (boolPanel[i] == true)
+                {
+                    boolPanel[i] = false;
+                    Panelanim[i].SetTrigger("doHide");
+                }
+            }
+            
+        }
+
         if (PanelNumber == 5)
         {
             if (boolPanel[4])
@@ -66,5 +84,6 @@ public class PanelManager : MonoBehaviour
                 Panelanim[Paneldown1].SetTrigger("doShow");
             }
         }
+
     }
 }
