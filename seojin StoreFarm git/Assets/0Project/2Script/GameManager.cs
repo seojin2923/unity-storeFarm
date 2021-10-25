@@ -127,36 +127,24 @@ public class GameManager : MonoBehaviour
 
     public void onClick()
     {
-        if (panelManager.boolPanel[0] == true)
+        for (int i = 0; i < 5; i++)
         {
-            panelManager.boolPanel[0] = false;
-            panelManager.Panelanim[0].SetTrigger("doHide");
+            if (i == 4)
+            {
+                panelManager.boolPanel[i] = false;
+                panelManager.xmlPanel.SetActive(false);
+            }
+            else
+            {
+                if (panelManager.boolPanel[i] == true)
+                {
+                    panelManager.boolPanel[i] = false;
+                    panelManager.Panelanim[i].SetTrigger("doHide");
+                }
+            }
+
         }
 
-        if (panelManager.boolPanel[1] == true)
-        {
-            panelManager.boolPanel[1] = false;
-            panelManager.Panelanim[1].SetTrigger("doHide");
-        }
-        
-        if (panelManager.boolPanel[2] == true)
-        {
-            panelManager.boolPanel[2] = false;
-            panelManager.Panelanim[2].SetTrigger("doHide");
-        }
-
-        if (panelManager.boolPanel[3] == true)
-        {
-            panelManager.boolPanel[3] = false;
-            panelManager.Panelanim[3].SetTrigger("doHide");
-        }
-
-        if (panelManager.boolPanel[4] == true)
-        {
-            panelManager.boolPanel[4] = false;
-            panelManager.xmlPanel.SetActive(false);
-        }
-        
         float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;
         int Line = storeManager.storeusing - 1;
 
