@@ -61,7 +61,7 @@ public class appUpdater : MonoBehaviour
 
     public void Updateyes()
     {
-        Application.OpenURL(versionManager.downloadLink);
+        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarmBeta.html");
     }
     public void UpdateNo()
     {
