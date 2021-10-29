@@ -57,20 +57,11 @@ public class GameManager : MonoBehaviour
         Money += int.Parse(Sentence[Line, 3]);
 
         //thing Timemoney
-        if (thingManager.boolthing1unLock == true)
-            Money += 50;
-
-        if (thingManager.boolthing2unLock == true)
-            Money += 3000;
-
-        if (thingManager.boolthing3unLock == true)
-            Money += 10000;
-
-        if (thingManager.boolthing4unLock == true)
-            Money += 20000;
-
-        if (thingManager.boolthing5unLock == true)
-            Money += 50000;
+        for(int i = 0; i < 13; i++)
+        {
+            if (thingManager.boolthingunLock[i] == true)
+                Money += int.Parse(thingManager.Sentence[i, 1]);
+        }
 
         StartCoroutine(Timemoney());
     }
