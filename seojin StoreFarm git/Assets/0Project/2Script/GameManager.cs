@@ -57,10 +57,10 @@ public class GameManager : MonoBehaviour
         Money += int.Parse(Sentence[Line, 3]);
 
         //thing Timemoney
-        for(int i = 0; i < 13; i++)
+        for (int i = 0; i < 12; i++)
         {
             if (thingManager.boolthingunLock[i] == true)
-                Money += int.Parse(thingManager.Sentence[i, 1]);
+                Money += int.Parse(thingManager.Sentence[i, 2]);
         }
 
         StartCoroutine(Timemoney());
@@ -120,20 +120,12 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            if (i == 4)
+            if (panelManager.boolPanel[i] == true)
             {
                 panelManager.boolPanel[i] = false;
-                panelManager.xmlPanel.SetActive(false);
+                panelManager.Panelanim[i].SetFloat("anim", -1.0f);
+                panelManager.Panelanim[i].SetTrigger("play");
             }
-            else
-            {
-                if (panelManager.boolPanel[i] == true)
-                {
-                    panelManager.boolPanel[i] = false;
-                    panelManager.Panelanim[i].SetTrigger("doHide");
-                }
-            }
-
         }
 
         float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;

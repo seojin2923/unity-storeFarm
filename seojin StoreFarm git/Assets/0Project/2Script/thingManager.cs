@@ -46,8 +46,8 @@ public class thingManager : MonoBehaviour
             boolthingunLock[down1] = true;
             thing[down1].SetActive(true);
 
-            LockGroup[down2].SetActive(true);
-            unLockGroup[down2].SetActive(true);
+            LockGroup[down1].SetActive(false);
+            unLockGroup[down1].SetActive(true);
         }
         else
         {

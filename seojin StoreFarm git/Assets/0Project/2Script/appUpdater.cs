@@ -20,6 +20,8 @@ public class appUpdater : MonoBehaviour
     public Text internetText;
     public GameObject internet;
 
+    public GameObject Betaorrelease;
+
     void Start()
     {
         CurVersion = Application.version;
@@ -61,10 +63,19 @@ public class appUpdater : MonoBehaviour
 
     public void Updateyes()
     {
-        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarmBeta.html");
+        Betaorrelease.SetActive(true);
     }
     public void UpdateNo()
     {
         load.LoadPlay();
+    }
+
+    public void Beta()
+    {
+        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarmBeta.html");
+    }
+    public void release()
+    {
+        Application.OpenURL("http://seojin1.kro.kr/2.0/html/game/storeFarm.html");
     }
 }

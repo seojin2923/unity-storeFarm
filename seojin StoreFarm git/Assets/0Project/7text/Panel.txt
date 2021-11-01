@@ -3,4 +3,4 @@ PanelNumber	PanelCode	PanelName
 2	storePanel	가게 업그레이드
 3	thingPanel	물건 구매
 4	upgradePanel	업그레이드
-5	xmlPanel	테스트
+5	여러가지Panel	여러가지

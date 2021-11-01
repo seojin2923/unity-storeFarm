@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PanelManager : MonoBehaviour
@@ -7,7 +5,6 @@ public class PanelManager : MonoBehaviour
     public bool[] boolPanel;
 
     public Animator[] Panelanim;
-    public GameObject xmlPanel;
 
     public TextAsset txt;
     string[,] Sentence;
@@ -40,50 +37,28 @@ public class PanelManager : MonoBehaviour
         int Panelup1 = PanelNumber + 1;
         int Paneldown1 = PanelNumber - 1;
 
-        for(int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
         {
-            if (i == 4)
+            if (boolPanel[i] == true)
             {
                 boolPanel[i] = false;
-                xmlPanel.SetActive(false);
+                Panelanim[i].SetFloat("anim", -1.0f);
+                Panelanim[i].SetTrigger("play");
             }
-            else 
-            {
-                if (boolPanel[i] == true)
-                {
-                    boolPanel[i] = false;
-                    Panelanim[i].SetTrigger("doHide");
-                }
-            }
-            
         }
 
-        if (PanelNumber == 5)
+
+        if (boolPanel[Paneldown1])
         {
-            if (boolPanel[4])
-            {
-                boolPanel[4] = false;
-                xmlPanel.SetActive(false);
-            }
-            else
-            {
-                boolPanel[4] = true;
-                xmlPanel.SetActive(true);
-            }
+            boolPanel[Paneldown1] = false;
+            Panelanim[Paneldown1].SetFloat("anim", -1.0f);
+            Panelanim[Paneldown1].SetTrigger("play");
         }
         else
         {
-            if (boolPanel[Paneldown1])
-            {
-                boolPanel[Paneldown1] = false;
-                Panelanim[Paneldown1].SetTrigger("doHide");
-            }
-            else
-            {
-                boolPanel[Paneldown1] = true;
-                Panelanim[Paneldown1].SetTrigger("doShow");
-            }
+            boolPanel[Paneldown1] = true;
+            Panelanim[Paneldown1].SetFloat("anim", 1.0f);
+            Panelanim[Paneldown1].SetTrigger("play");
         }
-
     }
 }

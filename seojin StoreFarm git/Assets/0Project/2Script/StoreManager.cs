@@ -25,6 +25,8 @@ public class StoreManager : MonoBehaviour
     string[,] Sentence;
     int lineSize, rowSize;
 
+    public string[] storename;
+
     void Start()
     {
         // 엔터단위와 탭으로 나눠서 배열의 크기 조정
@@ -52,24 +54,8 @@ public class StoreManager : MonoBehaviour
 
         string storetxt = Sentence[Line, 4];
 
-        if (storeusing == 1)
-            storeText.text = "아주 작은 가게";
-        else if (storeusing == 2)
-            storeText.text = "작은 가게";
-        else if (storeusing == 3)
-            storeText.text = "조금 괜찮은 가게";
-        else if (storeusing == 4)
-            storeText.text = "괜찮은 가게";
-        else if (storeusing == 5)
-            storeText.text = "좋은 가게";
-        else if (storeusing == 6)
-            storeText.text = "아주 좋은 가게";
-        else if (storeusing == 7)
-            storeText.text = "큰 가게";
-        else if (storeusing == 8)
-            storeText.text = "사과 모양 가게";
-        else if (storeusing == 9)
-            storeText.text = "복숭아 모양 가게";
+
+        storeText.text = storename[storeusing - 1];
 
         yield return null;
         StartCoroutine(reload());

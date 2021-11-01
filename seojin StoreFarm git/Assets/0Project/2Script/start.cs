@@ -26,14 +26,14 @@ public class start : MonoBehaviour
             Play.sprite = Play1;
             clickImg.SetActive(true);
             startTextbox.SetActive(true);
-            startText.GetComponent<Text>().text = "화면을 터치해서 돈을 모은다";
+            startText.GetComponent<Text>().text = "화면을 터치해서 돈을 모은다\n\n여기서는 아직 하는거 아님";
         }
         else if(page == 2)
         {
             Play.sprite = Play2;
             clickImg.SetActive(false);
             startTextbox.SetActive(true);
-            startText.GetComponent<Text>().text = "오른쪽 버튼들로 가게를 업그레이드 하거나 물건을 구매할수 있다.\n그리고 업적은 업적을 달성할시 몇골드를 받을수 있다.";
+            startText.GetComponent<Text>().text = "오른쪽 버튼들로 가게를 업그레이드 하거나 물건을 구매할수 있다.";
         }
         else if(page == 3)
         {
