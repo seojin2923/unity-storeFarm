@@ -1,83 +1,87 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Numerics;
 
 public class GameManager : MonoBehaviour
 {
+    public PanelManager panelManager;
     public StoreManager storeManager;
-    public DataManager dataManager;
+    public thingManager thingManager;
+    public UpgradeManager upgradeManager;
 
     public BigInteger Money;
     public BigInteger Gold;
 
     public Text MoneyTxt;
     public Text GoldTxt;
+    public Text TestText;
+
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
 
     void Start()
     {
-        StartCoroutine(oneTimemoneygold());
-        StartCoroutine(rent());
+        StartCoroutine(Timemoney());
 
-        GameLoad();
+        // ì—”í„°ë‹¨ìœ„ì™€ íƒ­ìœ¼ë¡œ ë‚˜ëˆ ì„œ ë°°ì—´ì˜ í¬ê¸° ì¡°ì •
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // í•œ ì¤„ì—ì„œ íƒ­ìœ¼ë¡œ ë‚˜ëˆ”
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
     }
 
     void Update()
     {
         ReLoad();
-        GameSave();
+        if (Input.GetButtonDown("Jump"))
+            onClick();
     }
 
-    IEnumerator oneTimemoneygold()
+    IEnumerator Timemoney()
     {
         yield return new WaitForSecondsRealtime(1);
 
-        if(storeManager.storeusing == 1)
-            Money += 1;
-        else if(storeManager.storeusing == 2)
-        {
+        //Store Timemoney
+        int Line = storeManager.storeusing - 1;
+        Money += int.Parse(Sentence[Line, 3]);
+
+        //thing Timemoney
+        if (thingManager.boolthing1unLock == true)
             Money += 50;
-            Gold += 1;
-        }
-        else if(storeManager.storeusing == 3)
-        {
-            Money += 100;
-            Gold += 2;
-        }
-        else if(storeManager.storeusing == 4)
-        {
-            Money += 500;
-            Gold += 3;
-        }
 
-        StartCoroutine(oneTimemoneygold());
-    }
+        if (thingManager.boolthing2unLock == true)
+            Money += 3000;
 
-    IEnumerator rent()
-    {
-        yield return new WaitForSecondsRealtime(180);
+        if (thingManager.boolthing3unLock == true)
+            Money += 10000;
 
-        if (storeManager.storeusing == 2)
-            Money -= 3000;
-        else if (storeManager.storeusing == 3)
-            Money -= 7000;
-        else if (storeManager.storeusing == 4)
-            Money -= 10000;
+        if (thingManager.boolthing4unLock == true)
+            Money += 20000;
 
-        StartCoroutine(rent());
+        if (thingManager.boolthing5unLock == true)
+            Money += 50000;
+
+        StartCoroutine(Timemoney());
     }
 
     void ReLoad()
     {
         MoneyTxt.text = GetMoneyText();
         GoldTxt.text = GetGoldText();
-
-        //MoneyTxt.text = Money + " ¿ø";
-        //GoldTxt.text = Gold + " °ñµå";
     }
 
-    private string[] moneyUnitArr = new string[] { "¿ø", "¸¸", "¾ï", "Á¶", "°æ", "ÇØ", "ÀÚ", "¾ç" };
+    private string[] moneyUnitArr = new string[] { "ì›", "ë§Œ ", "ì–µ ", "ì¡° ", "ê²½ ", "í•´ ", "ì ", "ì–‘ ", "êµ¬ ", "ê°„ " };
     private string GetMoneyText()
     {
         int placeN = 4;
@@ -92,14 +96,14 @@ public class GameManager : MonoBehaviour
         }
         while (value >= 1);
         string retStr = "";
-        for(int i = 0; i< numList.Count; i++)
+        for (int i = 0; i < numList.Count; i++)
         {
             retStr = numList[i] + moneyUnitArr[i] + retStr;
         }
         return retStr;
     }
 
-    private string[] goldUnitArr = new string[] { "°ñµå", ",", ",", ",", ",", ",", ",", "," };
+    private string[] goldUnitArr = new string[] { "ê³¨ë“œ", ",", ",", ",", ",", ",", ",", ",", "," };
     private string GetGoldText()
     {
         int placeN = 4;
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
         while (value >= 1);
         string retStr = "";
-        for(int i = 0; i< numList.Count; i++)
+        for (int i = 0; i < numList.Count; i++)
         {
             retStr = numList[i] + goldUnitArr[i] + retStr;
         }
@@ -123,52 +127,35 @@ public class GameManager : MonoBehaviour
 
     public void onClick()
     {
-        if(storeManager.storeusing == 1)
-        {
-            Money += (BigInteger)100;
-            Gold += (BigInteger)1;
-        }
-        else if(storeManager.storeusing == 2)
-        {
-            //Money += Money;
-            //Gold += Gold;
+        panelManager.boolPanel[0] = false;
+        panelManager.boolPanel[1] = false;
+        panelManager.boolPanel[2] = false;
+        panelManager.boolPanel[3] = false;
+        panelManager.boolPanel[4] = false;
 
-            Money += (BigInteger)200;
-            Gold += (BigInteger)2;
-        }
-        else if(storeManager.storeusing == 3)
-        {
-            Money += (BigInteger)1000;
-            Gold += (BigInteger)3;
-        }
-        else if(storeManager.storeusing == 4)
-        {
-            Money += (BigInteger)5000;
-            Gold += (BigInteger)5;
-        }
+        panelManager.boolPanel[0] = false;
 
-    }
+        float MoneyUpgradeLv = upgradeManager.MoneyUpgradeLevel / 5 + 1;
+        int Line = storeManager.storeusing - 1;
 
-    public void Reset()
-    {
-        Money = 0;
-        Gold = 0;
+        Money += int.Parse(Sentence[Line, 2]) * (int)MoneyUpgradeLv;
+
+        TestText.GetComponent<Text>().text = MoneyUpgradeLv.ToString();
     }
 
     public void GameSave()
     {
-        dataManager.CreateXml();
+
     }
 
     public void GameSaveOverlap()
     {
-        dataManager.SaveOverlapXml();
+
     }
-    
 
     public void GameLoad()
     {
-        dataManager.LoadXml();
+
     }
 
     public void GameExit()

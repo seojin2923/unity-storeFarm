@@ -1,157 +1,100 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Text;
+using System;
 
 public class StoreManager : MonoBehaviour
 {
     public GameManager gameManager;
 
+    public int storeusing;
+
     public Image storeImg;
     public Text storeText;
 
-    public Sprite ¾ÆÁÖÀÛÀº°¡°ÔImg;
-    public Sprite ÀÛÀº°¡°ÔImg;
-    public Sprite Á¶±İ±¦ÂúÀº°¡°ÔImg;
-    public Sprite ±¦ÂúÀº°¡°ÔImg;
+    public Sprite[] StoreImage;
 
-    public bool boolstore1unLock = true;
-    public bool boolstore2unLock = false;
-    public bool boolstore3unLock = false;
-    public bool boolstore4unLock = false;
-    public bool boolstore5unLock = false;
+    public bool[] boolstoreunLock;
 
-    public GameObject store2LockGroup;
-    public GameObject store2unLockGroup;
+    public GameObject[] storeLockGroup;
+    public GameObject[] storeunLockGroup;
 
-    public GameObject store3LockGroup;
-    public GameObject store3unLockGroup;
-
-    public GameObject store4LockGroup;
-    public GameObject store4unLockGroup;
-
-    public int storeusing;
-
-    public Animator StorePanelObj;
-    bool storePanelchacker;
-
-    public GameObject xmlPanelObj;
-    bool xmlPanelchacker;
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
 
     void Start()
     {
-        
+        // ì—”í„°ë‹¨ìœ„ì™€ íƒ­ìœ¼ë¡œ ë‚˜ëˆ ì„œ ë°°ì—´ì˜ í¬ê¸° ì¡°ì •
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // í•œ ì¤„ì—ì„œ íƒ­ìœ¼ë¡œ ë‚˜ëˆ”
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
+
+        StartCoroutine(reload());
     }
 
-    void Update()
+    IEnumerator reload()
     {
+        int Line = storeusing - 1;
+
+        storeImg.sprite = StoreImage[Line];
+
+        string storetxt = Sentence[Line, 4];
+
         if (storeusing == 1)
-        {
-            storeImg.sprite = ¾ÆÁÖÀÛÀº°¡°ÔImg;
-            storeText.text = "¾ÆÁÖ ÀÛÀº °¡°Ô";
-        }
+            storeText.text = "ì•„ì£¼ ì‘ì€ ê°€ê²Œ";
         else if (storeusing == 2)
-        {
-            storeImg.sprite = ÀÛÀº°¡°ÔImg;
-            storeText.text = "ÀÛÀº °¡°Ô";
-        }
+            storeText.text = "ì‘ì€ ê°€ê²Œ";
         else if (storeusing == 3)
-        {
-            storeImg.sprite = Á¶±İ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "Á¶±İ ±¦ÂúÀº °¡°Ô";
-        }
+            storeText.text = "ì¡°ê¸ˆ ê´œì°®ì€ ê°€ê²Œ";
         else if (storeusing == 4)
-        {
-            storeImg.sprite = ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "±¦ÂúÀº °¡°Ô";
-        }
-           
+            storeText.text = "ê´œì°®ì€ ê°€ê²Œ";
+        else if (storeusing == 5)
+            storeText.text = "ì¢‹ì€ ê°€ê²Œ";
+        else if (storeusing == 6)
+            storeText.text = "ì•„ì£¼ ì¢‹ì€ ê°€ê²Œ";
+        else if (storeusing == 7)
+            storeText.text = "í° ê°€ê²Œ";
+        else if (storeusing == 8)
+            storeText.text = "ì‚¬ê³¼ ëª¨ì–‘ ê°€ê²Œ";
+        else if (storeusing == 8)
+            storeText.text = "ë³µìˆ­ì•„ ëª¨ì–‘ ê°€ê²Œ";
 
-    }
-
-    public void storePanel()
-    {
-        if (storePanelchacker)
-        {
-            storePanelchacker = false;
-            StorePanelObj.SetTrigger("doHide");
-        }
-        else
-        {
-            storePanelchacker = true;
-            StorePanelObj.SetTrigger("doShow");
-        }   
+        yield return null;
+        StartCoroutine(reload());
     }
 
-    public void xmlPanel()
+    public void use(int number)
     {
-        if (xmlPanelchacker)
-        {
-            xmlPanelchacker = false;
-            xmlPanelObj.SetActive(false);
-        }
-        else
-        {
-            xmlPanelchacker = true;
-            xmlPanelObj.SetActive(true);
-        }   
+        storeusing = number;
     }
 
-    public void use1()
+    public void buy(int buy_number)
     {
-        storeusing = 1;
-    }
-    public void use2()
-    {
-        storeusing = 2;
-    }
-    public void use3()
-    {
-        storeusing = 3;
-    }
-    public void use4()
-    {
-        storeusing = 4;
-    }
+        int Line = buy_number - 1;
+        int Group_number = buy_number - 2;
 
-    public void buy2()
-    {
-        if (gameManager.Money > 12000)
+        if (gameManager.Money >= int.Parse(Sentence[Line, 1]))
         {
-            gameManager.Money -= 12000;
-            boolstore2unLock = true;
-            store2unLockGroup.SetActive(true);
-            store2LockGroup.SetActive(false);
-            use2();
+            gameManager.Money -= int.Parse(Sentence[Line, 1]);
+            boolstoreunLock[Line] = true;
+            storeunLockGroup[Group_number].SetActive(true);
+            storeLockGroup[Group_number].SetActive(false);
+            use(buy_number);
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
-    }
-    public void buy3()
-    {
-        if (gameManager.Money > 32000)
-        {
-            gameManager.Money -= 32000;
-            boolstore3unLock = true;
-            store3unLockGroup.SetActive(true);
-            store3LockGroup.SetActive(false);
-            use3();
-        }
-        else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
-    }
-    public void buy4()
-    {
-        if (gameManager.Money > 170000)
-        {
-            gameManager.Money -= 170000;
-            boolstore4unLock = true;
-            store4unLockGroup.SetActive(true);
-            store4LockGroup.SetActive(false);
-            use4();
-        }
-        else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
 
 }

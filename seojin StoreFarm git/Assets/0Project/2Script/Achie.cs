@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Achie : MonoBehaviour
+{
+    public GameManager gameManager;
+
+    public GameObject Achie1getbutton;
+    public GameObject Achie1clearbutton;
+
+    public void Achie1_clear()
+    {
+        gameManager.Gold += 5;
+        Achie1getbutton.SetActive(false);
+        Achie1clearbutton.SetActive(true);
+    }
+}
