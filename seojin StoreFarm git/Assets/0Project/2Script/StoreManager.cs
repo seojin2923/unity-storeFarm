@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,10 +10,10 @@ public class StoreManager : MonoBehaviour
     public Image storeImg;
     public Text storeText;
 
-    public Sprite ¾ÆÁÖÀÛÀº°¡°ÔImg;
-    public Sprite ÀÛÀº°¡°ÔImg;
-    public Sprite Á¶±İ±¦ÂúÀº°¡°ÔImg;
-    public Sprite ±¦ÂúÀº°¡°ÔImg;
+    public Sprite ì•„ì£¼ì‘ì€ê°€ê²ŒImg;
+    public Sprite ì‘ì€ê°€ê²ŒImg;
+    public Sprite ì¡°ê¸ˆê´œì°®ì€ê°€ê²ŒImg;
+    public Sprite ê´œì°®ì€ê°€ê²ŒImg;
 
     public bool boolstore1unLock = true;
     public bool boolstore2unLock = false;
@@ -32,8 +32,15 @@ public class StoreManager : MonoBehaviour
 
     public int storeusing;
 
-    public Animator StorePanelObj;
+    public Animator AchiPanelanim;
+    bool AchiPanelchacker;
+    public Animator StorePanelanim;
     bool storePanelchacker;
+    public Animator thingPanelanim;
+    bool thingPanelchacker;
+    public Animator upgradePanelanim;
+    bool upgradePanelchacker;
+    
 
     public GameObject xmlPanelObj;
     bool xmlPanelchacker;
@@ -47,39 +54,78 @@ public class StoreManager : MonoBehaviour
     {
         if (storeusing == 1)
         {
-            storeImg.sprite = ¾ÆÁÖÀÛÀº°¡°ÔImg;
-            storeText.text = "¾ÆÁÖ ÀÛÀº °¡°Ô";
+            storeImg.sprite = ì•„ì£¼ì‘ì€ê°€ê²ŒImg;
+            storeText.text = "ì•„ì£¼ì‘ì€ê°€ê²Œ";
         }
         else if (storeusing == 2)
         {
-            storeImg.sprite = ÀÛÀº°¡°ÔImg;
-            storeText.text = "ÀÛÀº °¡°Ô";
+            storeImg.sprite = ì‘ì€ê°€ê²ŒImg;
+            storeText.text = "ì‘ì€ê°€ê²Œ";
         }
         else if (storeusing == 3)
         {
-            storeImg.sprite = Á¶±İ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "Á¶±İ ±¦ÂúÀº °¡°Ô";
+            storeImg.sprite = ì¡°ê¸ˆê´œì°®ì€ê°€ê²ŒImg;
+            storeText.text = "ì¡°ê¸ˆê´œì°®ì€ê°€ê²Œ";
         }
         else if (storeusing == 4)
         {
-            storeImg.sprite = ±¦ÂúÀº°¡°ÔImg;
-            storeText.text = "±¦ÂúÀº °¡°Ô";
+            storeImg.sprite = ê´œì°®ì€ê°€ê²ŒImg;
+            storeText.text = "ê´œì°®ì€ê°€ê²Œ";
         }
            
 
     }
 
+    public void AchiPanel()
+    {
+        if (AchiPanelchacker)
+        {
+            AchiPanelchacker = false;
+            AchiPanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            AchiPanelchacker = true;
+            AchiPanelanim.SetTrigger("doShow");
+        }
+    }
     public void storePanel()
     {
         if (storePanelchacker)
         {
             storePanelchacker = false;
-            StorePanelObj.SetTrigger("doHide");
+            StorePanelanim.SetTrigger("doHide");
         }
         else
         {
             storePanelchacker = true;
-            StorePanelObj.SetTrigger("doShow");
+            StorePanelanim.SetTrigger("doShow");
+        }   
+    }
+    public void thingPanel()
+    {
+        if (thingPanelchacker)
+        {
+            thingPanelchacker = false;
+            thingPanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            thingPanelchacker = true;
+            thingPanelanim.SetTrigger("doShow");
+        }   
+    }
+    public void upgradePanel()
+    {
+        if (upgradePanelchacker)
+        {
+            upgradePanelchacker = false;
+            upgradePanelanim.SetTrigger("doHide");
+        }
+        else
+        {
+            upgradePanelchacker = true;
+            upgradePanelanim.SetTrigger("doShow");
         }   
     }
 
@@ -116,42 +162,42 @@ public class StoreManager : MonoBehaviour
 
     public void buy2()
     {
-        if (gameManager.Money > 12000)
+        if (gameManager.Money > 95000)
         {
-            gameManager.Money -= 12000;
+            gameManager.Money -= 95000;
             boolstore2unLock = true;
             store2unLockGroup.SetActive(true);
             store2LockGroup.SetActive(false);
             use2();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
     public void buy3()
     {
-        if (gameManager.Money > 32000)
+        if (gameManager.Money > 295000)
         {
-            gameManager.Money -= 32000;
+            gameManager.Money -= 295000;
             boolstore3unLock = true;
             store3unLockGroup.SetActive(true);
             store3LockGroup.SetActive(false);
             use3();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
     public void buy4()
     {
-        if (gameManager.Money > 170000)
+        if (gameManager.Money > 1000000)
         {
-            gameManager.Money -= 170000;
+            gameManager.Money -= 1000000;
             boolstore4unLock = true;
             store4unLockGroup.SetActive(true);
             store4LockGroup.SetActive(false);
             use4();
         }
         else
-            Debug.Log("µ·ÀÌ " + gameManager.Money + "¿ø ¹Û¿¡ ¾øÀ½ µ·ÀÌ ¸ğÀÚ¶ó");
+            Debug.Log("ëˆì´ " + gameManager.Money + "ë°–ì— ì—†ìŒ ëª¨ìë¼");
     }
 
 }
