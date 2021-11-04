@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
         GoldTxt.text = GetGoldText();
     }
 
-    private string[] moneyUnitArr = new string[] { "원", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 " };
+    private string[] moneyUnitArr = new string[] { "원", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 ", "정", "재", "극" };
     private string GetMoneyText()
     {
         int placeN = 4;
@@ -136,24 +136,13 @@ public class GameManager : MonoBehaviour
         TestText.GetComponent<Text>().text = MoneyUpgradeLv.ToString();
     }
 
-    public void GameSave()
+    public void 더블()
     {
-
-    }
-
-    public void GameSaveOverlap()
-    {
-
-    }
-
-    public void GameLoad()
-    {
-
+        Money += Money;
     }
 
     public void GameExit()
     {
         Application.Quit();
-        GameSave();
     }
 }

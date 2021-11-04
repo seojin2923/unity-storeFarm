@@ -11,7 +11,7 @@ public class Achie : MonoBehaviour
 
     public void Achie1_clear()
     {
-        gameManager.Gold += 5;
+        gameManager.Money += 100000;
         Achie1getbutton.SetActive(false);
         Achie1clearbutton.SetActive(true);
     }
