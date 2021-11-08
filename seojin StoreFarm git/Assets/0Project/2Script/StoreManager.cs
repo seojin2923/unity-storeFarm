@@ -55,7 +55,7 @@ public class StoreManager : MonoBehaviour
         string storetxt = Sentence[Line, 4];
 
 
-        storeText.text = storename[Line];
+        storeText.text = storename[storeusing - 1];
 
         yield return null;
         StartCoroutine(reload());
