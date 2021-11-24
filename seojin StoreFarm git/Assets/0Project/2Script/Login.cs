@@ -12,6 +12,7 @@ public class Login : MonoBehaviour
     [Header("create Panel")]
     public InputField newID;
     public InputField newPW;
+    public Button newBtn;
 
     [Header("·Î±×ÀÎ")]
     public string LoginUrl;
@@ -28,18 +29,22 @@ public class Login : MonoBehaviour
 
     IEnumerator LoginCo()
     {
-        Debug.Log(LoginID.text);
-        Debug.Log(LoginPW.text);
+        WWW www = new WWW("http://net.seojin1.kro.kr/sqlconnect/register.php");
+        from.AddField("name", newID.text);
+        from.AddField("password", newPW.text);
+        yield return www;
+        if (www.text == "0")
+        {
+            Debug.Log("User created successfully");
+        }
+        else
+        {
+            Debug.Log("User creation fail. Error #" + www.text);
+        }
+    }
 
-        WWWForm form = new WWWForm();
-        form.AddField("Input_user", LoginID.text);
-        form.AddField("Input_pass", LoginPW.text);
-
-        WWW webRequest = new WWW(LoginUrl, form);
-        yield return webRequest;
-
-        Debug.Log(webRequest.text);
-
-        yield return null;
+    public void VerifyInputs()
+    {
+        newBtn.interactable = (newID.text.Length >= 8 && newPW.text.Length >= 8);
     }
 }
