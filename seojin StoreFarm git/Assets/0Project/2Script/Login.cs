@@ -12,39 +12,51 @@ public class Login : MonoBehaviour
     [Header("create Panel")]
     public InputField newID;
     public InputField newPW;
-    public Button newBtn;
 
-    [Header("·Î±×ÀÎ")]
-    public string LoginUrl;
+    string LoginURL = "http://storeFarm.seojin1.kro.kr/login.php";
+    string newURL = "http://storeFarm.seojin1.kro.kr/new.php";
+
 
     void Start()
     {
-        LoginUrl = "";
+        
     }
 
-    public void LoginBtn()
+    void Update()
     {
-        StartCoroutine(LoginCo());
+        
     }
 
-    IEnumerator LoginCo()
+    public void ToLogin()
     {
-        WWW www = new WWW("http://net.seojin1.kro.kr/sqlconnect/register.php");
-        from.AddField("name", newID.text);
-        from.AddField("password", newPW.text);
+        StartCoroutine(LoginToDB(LoginID.ToString(), LoginPW.ToString()));
+    }
+
+    IEnumerator LoginToDB(string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("usernamePost", username);
+        form.AddField("passwordPost", password);
+
+        WWW www = new WWW(LoginURL, form);
+
         yield return www;
-        if (www.text == "0")
-        {
-            Debug.Log("User created successfully");
-        }
-        else
-        {
-            Debug.Log("User creation fail. Error #" + www.text);
-        }
+        Debug.Log(www.text);
     }
 
-    public void VerifyInputs()
+    public void newLogin()
     {
-        newBtn.interactable = (newID.text.Length >= 8 && newPW.text.Length >= 8);
+        StartCoroutine(newLogin(newID.ToString(), newPW.ToString()));
+    }
+
+    IEnumerator newLogin(string username, string password)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("usernamePost", username);
+        form.AddField("passwordPost", password);
+
+        WWW www = new WWW(newURL, form);
+        yield return www;
+        Debug.Log(www.text);
     }
 }
