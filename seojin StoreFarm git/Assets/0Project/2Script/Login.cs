@@ -22,41 +22,24 @@ public class Login : MonoBehaviour
         
     }
 
-    void Update()
-    {
-        
-    }
-
     public void ToLogin()
     {
-        StartCoroutine(LoginToDB(LoginID.ToString(), LoginPW.ToString()));
+        StartCoroutine(LoginCo());
     }
 
-    IEnumerator LoginToDB(string username, string password)
+    IEnumerator LoginCo()
     {
+        string Loginname = LoginID.text;
+        string Loginpasswd = LoginPW.text;
+
         WWWForm form = new WWWForm();
-        form.AddField("usernamePost", username);
-        form.AddField("passwordPost", password);
+        form.AddField("Input_user", Loginname);
+        form.AddField("Input_pass", Loginpasswd);
 
-        WWW www = new WWW(LoginURL, form);
+        WWW WWW = new WWW(LoginURL, form);
+        yield return WWW;
 
-        yield return www;
-        Debug.Log(www.text);
+        Debug.Log(WWW.text);
     }
-
-    public void newLogin()
-    {
-        StartCoroutine(newLogin(newID.ToString(), newPW.ToString()));
-    }
-
-    IEnumerator newLogin(string username, string password)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("usernamePost", username);
-        form.AddField("passwordPost", password);
-
-        WWW www = new WWW(newURL, form);
-        yield return www;
-        Debug.Log(www.text);
-    }
+    
 }
