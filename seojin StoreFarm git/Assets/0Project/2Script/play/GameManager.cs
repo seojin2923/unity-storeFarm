@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class GameManager : MonoBehaviour
     public BigInteger Money;
     public BigInteger Gold;
 
-    public Text MoneyTxt;
-    public Text GoldTxt;
+    public Text MoneyUI;
+    public Text GoldUI;
     public Text TestText;
 
     public TextAsset txt;
@@ -68,8 +69,8 @@ public class GameManager : MonoBehaviour
 
     void ReLoad()
     {
-        MoneyTxt.text = GetMoneyText();
-        GoldTxt.text = GetGoldText();
+        MoneyUI.text = GetMoneyText();
+        GoldUI.text = GetGoldText();
     }
 
     private string[] moneyUnitArr = new string[] { "원", "만 ", "억 ", "조 ", "경 ", "해 ", "자 ", "양 ", "구 ", "간 ", "정", "재", "극" };

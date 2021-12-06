@@ -8306,6 +8306,7 @@ GameObject:
   - component: {fileID: 620201297}
   - component: {fileID: 620201299}
   - component: {fileID: 620201298}
+  - component: {fileID: 620201300}
   m_Layer: 5
   m_Name: Gold Txt
   m_TagString: Untagged
@@ -8374,6 +8375,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 620201296}
   m_CullTransparentMesh: 1
+--- !u!114 &620201300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620201296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6c8b93acb13854da72e0d869260d02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
 --- !u!1 &623195195
 GameObject:
   m_ObjectHideFlags: 0
@@ -25940,10 +25954,20 @@ MonoBehaviour:
   storeManager: {fileID: 1216665896}
   thingManager: {fileID: 1998839143}
   upgradeManager: {fileID: 903585987}
-  MoneyTxt: {fileID: 956868352}
-  GoldTxt: {fileID: 620201298}
+  MoneyUI: {fileID: 956868352}
+  GoldUI: {fileID: 620201298}
   TestText: {fileID: 316513365}
   txt: {fileID: 4900000, guid: 64fb530c81dfd904888c4b645fb3df2a, type: 3}
+  goldUnitArr:
+  - "\uACE8\uB4DC"
+  - ','
+  - ','
+  - ','
+  - ','
+  - ','
+  - ','
+  - ','
+  - ','
 --- !u!1 &2035538061
 GameObject:
   m_ObjectHideFlags: 0

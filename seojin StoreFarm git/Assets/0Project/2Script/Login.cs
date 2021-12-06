@@ -36,10 +36,12 @@ public class Login : MonoBehaviour
         form.AddField("Input_user", Loginname);
         form.AddField("Input_pass", Loginpasswd);
 
-        WWW WWW = new WWW(LoginURL, form);
-        yield return WWW;
+        //WWW WWW = new WWW(LoginURL, form);
+        //yield return WWW;
 
-        Debug.Log(WWW.text);
+        yield return null;
+
+        //Debug.Log(WWW.text);
     }
     
 }

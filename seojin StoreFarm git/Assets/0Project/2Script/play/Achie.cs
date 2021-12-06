@@ -19,7 +19,7 @@ public class Achie : MonoBehaviour
 
     void Update()
     {
-        if (achie2level == 0)
+        /*if (achie2level == 0)
         {
             achie2MainText.text = "머니\n" + achie2needlevel + "레벨 달성";
             achie2GetText.text = achie2level + "만원";
@@ -29,7 +29,7 @@ public class Achie : MonoBehaviour
                 AchiegetButton[0].SetActive(true);
                 AchieclearButton[0].SetActive(false);
             }
-        }
+        }*/
             
     }
 
