@@ -11,45 +11,48 @@ public class Achie : MonoBehaviour
     public GameObject[] AchiegetButton;
     public GameObject[] AchieclearButton;
 
-    int achie2level;
-    public Text achie2MainText;
-    public Text achie2GetText;
+    public TextAsset txt;
+    string[,] Sentence;
+    int lineSize, rowSize;
 
-    public int[] achie2needlevel;
+    public bool[] Achie_clear_bool;
+
+    void Start()
+    {
+        Achie_clear_bool[0] = true;
+
+        // 엔터단위와 탭으로 나눠서 배열의 크기 조정
+        string currentText = txt.text.Substring(0, txt.text.Length - 1);
+        string[] line = currentText.Split('\n');
+        lineSize = line.Length;
+        rowSize = line[0].Split('\t').Length;
+        Sentence = new string[lineSize, rowSize];
+
+        // 한 줄에서 탭으로 나눔
+        for (int i = 0; i < lineSize; i++)
+        {
+            string[] row = line[i].Split('\t');
+            for (int j = 0; j < rowSize; j++) Sentence[i, j] = row[j];
+        }
+    }
 
     void Update()
     {
-        /*if (achie2level == 0)
+        if(gameManager.Money >= 1000000)
         {
-            achie2MainText.text = "머니\n" + achie2needlevel + "레벨 달성";
-            achie2GetText.text = achie2level + "만원";
-
-            if (upgradeManager.MoneyUpgradeLevel >= achie2needlevel[0])
-            {
-                AchiegetButton[0].SetActive(true);
-                AchieclearButton[0].SetActive(false);
-            }
-        }*/
-            
-    }
-
-    public void Achie1_clear()
-    {
-        gameManager.Money += 100000;
-        AchiegetButton[0].SetActive(false);
-        AchieclearButton[0].SetActive(true);
-    }
-
-    public void Achie_clear(int clear_number)
-    {
-        int down1 = clear_number - 1;
-
-        if(clear_number == 2)
-        {
-            achie2level++;
+            Achie_clear_bool[1] = true;
         }
+    }
 
-        AchiegetButton[down1].SetActive(false);
-        AchieclearButton[down1].SetActive(true);
+    public void Achie_clear(int clear_num)
+    {
+        if (Achie_clear_bool[clear_num] == true)
+        {
+            gameManager.Money += int.Parse(Sentence[clear_num, 1]);
+            AchiegetButton[clear_num].SetActive(false);
+            AchieclearButton[clear_num].SetActive(true);
+        }
+        else
+            return;
     }
 }
