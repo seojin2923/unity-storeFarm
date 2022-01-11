@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Achie : MonoBehaviour
 {
     public GameManager gameManager;
-    public UpgradeManager upgradeManager;
+    public thingManager thingManager;
 
     public GameObject[] AchiegetButton;
     public GameObject[] AchieclearButton;
@@ -42,6 +42,11 @@ public class Achie : MonoBehaviour
         {
             Achie_clear_bool[1] = true;
         }
+
+        if (thingManager.boolthingunLock[8])
+        {
+            Achie_clear_bool[2] = true;
+        }
     }
 
     public void Achie_clear(int clear_num)
@@ -49,6 +54,7 @@ public class Achie : MonoBehaviour
         if (Achie_clear_bool[clear_num] == true)
         {
             gameManager.Money += int.Parse(Sentence[clear_num, 1]);
+            gameManager.Gold += int.Parse(Sentence[clear_num, 2]);
             AchiegetButton[clear_num].SetActive(false);
             AchieclearButton[clear_num].SetActive(true);
         }

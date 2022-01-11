@@ -7,14 +7,18 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("매니저")]
     public PanelManager panelManager;
     public StoreManager storeManager;
     public thingManager thingManager;
     public UpgradeManager upgradeManager;
+    public setting settingManager;
 
+    //머니
     public BigInteger Money;
     public BigInteger Gold;
 
+    [Header("머니")]
     public Text MoneyUI;
     public Text GoldUI;
     public Text TestText;
@@ -126,6 +130,7 @@ public class GameManager : MonoBehaviour
                 panelManager.boolPanel[i] = false;
                 panelManager.Panelanim[i].SetFloat("anim", -1.0f);
                 panelManager.Panelanim[i].SetTrigger("play");
+                settingManager.SFX(2);
             }
         }
 
@@ -140,6 +145,7 @@ public class GameManager : MonoBehaviour
     public void 더블()
     {
         Money += Money;
+        settingManager.SFX(0);
     }
 
     public void GameExit()

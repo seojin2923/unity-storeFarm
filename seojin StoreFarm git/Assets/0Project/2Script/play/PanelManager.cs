@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PanelManager : MonoBehaviour
 {
+    public setting settingManager;
+
     public bool[] boolPanel;
 
     public Animator[] Panelanim;
@@ -44,6 +46,7 @@ public class PanelManager : MonoBehaviour
                 boolPanel[i] = false;
                 Panelanim[i].SetFloat("anim", -1.0f);
                 Panelanim[i].SetTrigger("play");
+                settingManager.SFX(2);
             }
         }
 
@@ -53,12 +56,15 @@ public class PanelManager : MonoBehaviour
             boolPanel[Paneldown1] = false;
             Panelanim[Paneldown1].SetFloat("anim", -1.0f);
             Panelanim[Paneldown1].SetTrigger("play");
+            settingManager.SFX(2);
         }
         else
         {
             boolPanel[Paneldown1] = true;
             Panelanim[Paneldown1].SetFloat("anim", 1.0f);
             Panelanim[Paneldown1].SetTrigger("play");
+            settingManager.SFX(0);
+            settingManager.SFX(1);
         }
     }
 }
