@@ -1,0 +1,6 @@
+PanelNumber	PanelCode	PanelName
+1	AchiPanel	도전과제
+2	storePanel	가게 업그레이드
+3	thingPanel	물건 구매
+4	upgradePanel	업그레이드
+5	settingPanel	설정
